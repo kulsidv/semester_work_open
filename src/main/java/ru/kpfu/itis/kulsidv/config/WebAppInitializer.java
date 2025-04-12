@@ -8,7 +8,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class[]{
-                WebConfig.class
+                CoreConfig.class
         };
     }
 
