@@ -3,6 +3,7 @@ package ru.kpfu.itis.kulsidv.entity;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -12,17 +13,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
-
-    @Column(name = "last_name")
-    private String lastname;
+    @Column(name = "username", nullable = false)
+    private String username;
 
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "age")
-    private Integer age;
+    @Column(name = "bithdate", columnDefinition = "TIMESTAMP")
+    private String birthdate;
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -33,10 +31,21 @@ public class User {
     @OneToMany(mappedBy = "user_id")
     private List<Progress> progresses;
 
-    @Column(name = "role", nullable = false)
-    private Boolean role;
+    @ManyToMany
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+    )
+    private Set<Role> roles;
 
     public User() {}
+
+    public User(String username, String password, String email){
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
 
     public int getId() {
         return id;
@@ -46,36 +55,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 
     public String getPassword() {
@@ -98,15 +83,35 @@ public class User {
         this.id = id;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
     public List<Progress> getProgresses() {
         return progresses;
     }
 
     public void setProgresses(List<Progress> progresses) {
         this.progresses = progresses;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
     }
 }
