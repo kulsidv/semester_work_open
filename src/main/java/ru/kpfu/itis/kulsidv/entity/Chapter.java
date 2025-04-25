@@ -1,7 +1,9 @@
 package ru.kpfu.itis.kulsidv.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Check;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,14 +17,15 @@ public class Chapter {
     @Column(name = "title", nullable = false, unique = true)
     private String title;
 
-    @Column(name = "chapter_num", columnDefinition = "NOT NULL UNIQUE CHECK(chapter_num > 0)")
+    @Column(name = "chapter_num", nullable = false, unique = true)
+    @Check(constraints = "chapter_num > 0")
     private Integer chapterNum;
 
-    @OneToMany(mappedBy = "paragraph_id")
-    List<Paragraph> paragraphs;
+    @OneToMany(mappedBy = "chapter")
+    List<Paragraph> paragraphs = new ArrayList<>();
 
-    @OneToMany(mappedBy = "chapter_id")
-    private List<Progress> progresses;
+    @OneToMany(mappedBy = "chapter")
+    private List<Progress> progresses = new ArrayList<>();
 
     public Chapter() {}
 

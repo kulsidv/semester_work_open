@@ -2,6 +2,7 @@ package ru.kpfu.itis.kulsidv.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -20,15 +21,15 @@ public class User {
     private String email;
 
     @Column(name = "bithdate", columnDefinition = "TIMESTAMP")
-    private String birthdate;
+    private LocalDateTime birthdate;
 
     @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "created_at", columnDefinition = "TIMESTAMP")
-    private String created;
+    private LocalDateTime created;
 
-    @OneToMany(mappedBy = "user_id")
+    @OneToMany(mappedBy = "user")
     private List<Progress> progresses;
 
     @ManyToMany
@@ -71,14 +72,6 @@ public class User {
         this.password = password;
     }
 
-    public String getCreated() {
-        return created;
-    }
-
-    public void setCreated(String created) {
-        this.created = created;
-    }
-
     public void setId(Integer id) {
         this.id = id;
     }
@@ -107,11 +100,19 @@ public class User {
         this.username = username;
     }
 
-    public String getBirthdate() {
+    public LocalDateTime getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(String birthdate) {
+    public void setBirthdate(LocalDateTime birthdate) {
         this.birthdate = birthdate;
+    }
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
     }
 }

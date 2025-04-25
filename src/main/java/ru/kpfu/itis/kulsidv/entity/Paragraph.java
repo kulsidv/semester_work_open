@@ -10,12 +10,13 @@ public class Paragraph {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "text")
+    @Column(name = "text", length = 1000)
     private String text;
 
     @Column(name = "pict")
     private String pict;
 
+    @ManyToOne
     @JoinColumn(name = "chapter_id")
     private Chapter chapter;
 
