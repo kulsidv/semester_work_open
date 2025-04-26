@@ -3,6 +3,8 @@ package ru.kpfu.itis.kulsidv.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -46,6 +48,10 @@ public class User {
         this.username = username;
         this.password = password;
         this.email = email;
+        this.progresses = new ArrayList<>();
+        this.roles = new HashSet<>();
+        this.birthdate = LocalDateTime.now();
+        this.created = LocalDateTime.now();
     }
 
     public int getId() {
@@ -114,5 +120,19 @@ public class User {
 
     public void setCreated(LocalDateTime created) {
         this.created = created;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", birthdate=" + birthdate +
+                ", password='" + password + '\'' +
+                ", created=" + created +
+                ", progresses=" + progresses +
+                ", roles=" + roles +
+                '}';
     }
 }

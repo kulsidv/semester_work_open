@@ -72,7 +72,7 @@ public class PersistenceConfig implements EnvironmentAware {
     }
 
     @Bean
-    PlatformTransactionManager platformTransactionManager() {
+    public PlatformTransactionManager platformTransactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory());
         return transactionManager;

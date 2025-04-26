@@ -4,15 +4,22 @@
     <meta charset="UTF-8">
     <meta lang="ru">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.23.6/dist/css/uikit.min.css" />
-    <title>Вход в аккаунт</title>
+    <title>Регистрация</title>
 </head>
 <body>
-<form method="post" action="/login">
+<form method="post" action="/registration">
 
     <div class="uk-margin">
         <div class="uk-inline">
             <span class="uk-form-icon" uk-icon="icon: user"></span>
             <input class="uk-input" type="text" name="username" aria-label="Not clickable icon" placeholder="Введите имя" required>
+        </div>
+    </div>
+
+    <div class="uk-margin">
+        <div class="uk-inline">
+            <span class="uk-form-icon" uk-icon="icon: user"></span>
+            <input class="uk-input" type="email" name="email" aria-label="Not clickable icon" placeholder="Введите email" required>
         </div>
     </div>
 

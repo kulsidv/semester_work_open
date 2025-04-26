@@ -24,13 +24,4 @@ public class CustomUserDetailsService implements UserDetailsService {
         return user.map(CustomUserDetails::new)
                 .orElseThrow(() -> new UsernameNotFoundException(username));
     }
-
-    public boolean save(User user) {
-        try{
-            userRepository.save(user);
-        } catch(Exception e) {
-            return false;
-        }
-        return true;
-    }
 }

@@ -8,6 +8,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -17,17 +18,18 @@ import ru.kpfu.itis.kulsidv.service.CustomUserDetailsService;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final CustomUserDetailsService userDetailsService;
+    private final CustomUserDetailsService userService;
 
-    public SecurityConfig(CustomUserDetailsService userDetailsService){
-        this.userDetailsService = userDetailsService;
+    public SecurityConfig(CustomUserDetailsService userService){
+        this.userService = userService;
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/", "/login").permitAll()
+                        .requestMatchers("/", "/login", "/registration").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -45,7 +47,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(PasswordEncoder passwordEncoder) throws Exception {
+    public AuthenticationManager authenticationManager(PasswordEncoder passwordEncoder, UserDetailsService userDetailsService) throws Exception {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService);
         authenticationProvider.setPasswordEncoder(passwordEncoder);

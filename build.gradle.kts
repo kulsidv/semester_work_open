@@ -37,6 +37,8 @@ dependencies {
     implementation("com.mchange:c3p0:0.10.2")
     implementation("org.freemarker:freemarker:2.3.34")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.18.3")
+    implementation("org.apache.logging.log4j:log4j-core:2.16.0")
+    implementation("org.apache.logging.log4j:log4j-api:2.16.0")
 }
 
 tasks.test {
