@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - changeSet:
+      id: 6
+      author: postgres
+      changes:
+        - dropForeignKeyConstraint:
+            baseTableName: progresses
+            constraintName: fk35ar6a1hyt1ggp3kyonrqn7p4
+        - addForeignKeyConstraint:
+            baseTableName: progresses
+            baseColumnNames: user_id
+            constraintName: user_progress
+            referencedTableName: users
+            referencedColumnNames: id
+            onDelete: CASCADE
+      comment: "Add cascade deleting for user progress"
